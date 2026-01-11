@@ -1,0 +1,33 @@
+name: Generate RSS Feed
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.md' # Nur ausführen, wenn Markdown-Dateien geändert werden
+  workflow_dispatch: # Erlaubt manuelles Starten
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Wichtig, um die feed.xml zurückschreiben zu dürfen
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      - name: Run RSS Generator
+        run: php generate-rss.php
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update RSS feed [skip ci]"
+          file_pattern: 'feed.xml'
