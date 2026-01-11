@@ -1,0 +1,65 @@
+---
+title: oo - Intro und Version
+source: https://gemini.google.com/gem/1692906d9713/7688d316efff4b4f
+author:
+  - "[[Gemini]]"
+published:
+created: 2026-01-11
+description: Chatte mit Gemini, dem KI-Assistenten von Google. Lass dich beim Schreiben, Planen, Sammeln von Ideen und vielem mehr von der leistungsfähigen generativen KI von Google unterstützen.
+tags:
+  - clippings
+---
+Hand aufs Herz: Hast du Drupal bisher immer nur auf „Sparflamme“ betrieben? Vielleicht auf einem Shared Hosting, wo du dir die Ressourcen mit hunderten anderen teilen musstest? Oder lokal in einer Docker-Umgebung, die zwar läuft, aber sich irgendwie... *abgekapselt* anfühlt?
+
+Vergiss das. Heute ändern wir die Spielregeln.
+
+Wir befinden uns am Beginn einer neuen Ära. Mit dem **Drupal CMS** (ehemals „Starshot“) wird Drupal zugänglicher, mächtiger und smarter als je zuvor. Aber ein Formel-1-Bolide gehört nicht auf den Verkehrsübungsplatz. Er gehört auf die Rennstrecke.
+
+In dieser Serie bauen wir genau diese Rennstrecke. Wir installieren nicht einfach nur „ein CMS“. Wir schmieden eine **Enterprise-Infrastruktur** auf Basis von Ubuntu 24.04 LTS, die bereit ist für alles, was kommt – inklusive Künstlicher Intelligenz, RAG (Retrieval Augmented Generation) und massiven Traffic-Peaks.
+
+Ich bin dein Tech-Sherpa auf dieser Tour. Pack deine Sachen, wir verlassen das Tal der „Standard-Installationen“.
+
+### Deine Mission: High-Performance statt Durchschnitt
+
+Warum machen wir das Ganze manuell per SSH? Warum klicken wir uns keinen fertigen Server zusammen? Weil **Du** die Kontrolle haben willst.
+
+Wenn du verstehst, wie die Zahnräder unter der Haube ineinandergreifen, verlierst du die Angst vor dem "Server-Crash". Du wirst vom Passagier zum Chef-Ingenieur. Wir bauen ein System, das so performant ist, dass deine Google PageSpeed Scores grün leuchten, bevor du überhaupt das Caching-Modul aktiviert hast.
+
+### Unser Tech-Stack: Das "Dream Team"
+
+Wir nutzen keine veraltete Technik. Wir setzen auf Komponenten, die modern, skalierbar und AI-ready sind. Hier ist dein Inventar für dieses Quest:
+
+1. **Das Fundament: Ubuntu Server 24.04 LTS** Wir nutzen die neueste Long Term Support Version. Stabil wie ein Fels, sicher und der Industriestandard. Wir starten mit einer **frischen Installation**, erstellen einen dedizierten User und härten das System ab. Kein `root`\-Gebastel, sondern saubere Rechteverwaltung via `sudo`.
+2. **Der Motor: Drupal CMS** Wir installieren nicht Drupal 10 Core. Wir holen uns direkt das Paket `drupal/cms` via Composer. Das ist die Zukunft – vorkonfiguriert für echte Use-Cases.
+3. **Das Gehirn: PostgreSQL 16 (statt MySQL)** Hier weichen wir vom Standard ab – aus gutem Grund. Für moderne AI-Anwendungen und lokale Dokumentenverarbeitung (RAG) ist PostgreSQL mit seiner Vektor-Unterstützung der Goldstandard. MySQL ist gut, Postgres ist für unsere Ziele besser.
+4. **Der Turbo: Redis & PHP-Tuning** Bei 16 GB RAM und 4 CPU-Kernen müssen wir nicht geizen. Wir geben PHP (Version 8.3) ordentlich Speicher (**512 MB Memory Limit**) und nutzen **Redis** als Hochgeschwindigkeits-Cache. Deine Datenbank wird sich langweilen, weil Redis die Antworten liefert, bevor die Anfrage überhaupt dort ankommt.
+5. **Der Zugang: SSH only** Keine grafische Oberfläche, kein Klicki-Bunti-Admin-Panel. Nur du, dein Terminal und die reine Power der Kommandozeile. Das ist direkter, schneller und sicherer.
+
+### An wen richtet sich dieser Guide?
+
+Dieser Kurs ist für **Macher**.
+
+- Du bist Web-Entwickler, Agentur-Inhaber oder ambitionierter Marketer mit technischem Verständnis.
+- Du hast keine Angst vor einem schwarzen Fenster mit weißer Schrift.
+- Du willst verstehen, *warum* wir etwas konfigurieren, nicht nur copy-pasten (obwohl du das natürlich darfst 😉).
+
+### Das Szenario
+
+Wir gehen davon aus, dass du Zugriff auf einen frischen VPS (Virtual Private Server) oder Root-Server hast.
+
+- **OS:** Ubuntu 24.04 LTS
+- **Hardware:** 4 vCPUs, 16 GB RAM (empfohlen für das volle Tuning-Programm)
+- **Zugriff:** Du hast die IP-Adresse und das Root-Passwort (oder einen SSH-Key).
+
+Bist du bereit, deine Skills auf das nächste Level zu heben? Willst du eine Plattform bauen, die nicht nur heute, sondern auch 2030 noch relevant ist?
+
+Dann öffne dein Terminal. Putz die Tastatur. Es geht los.
+
+### Keyfacts: Das nimmst du mit
+
+Bevor wir in die Details gehen, hier das Wichtigste auf einen Blick:
+
+- **Next-Gen Setup:** Wir bauen einen Server, der spezifisch für das neue **Drupal CMS** und **AI-Workflows** optimiert ist.
+- **PostgreSQL Power:** Wir nutzen Postgres statt MySQL, um später Vektor-Datenbank-Features (für AI) nutzen zu können.
+- **Performance First:** Mit Redis, PHP 8.3 und großzügigem Memory-Limit (512MB+) reizen wir deine Hardware (16GB RAM) voll aus.
+- **Security by Design:** Wir arbeiten ausschließlich via SSH, nutzen keine Root-Logins für die Arbeit und setzen auf saubere Linux-Rechteverwaltung.
