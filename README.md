@@ -1,14 +1,3 @@
----
-title: oo - Intro und Version
-source: https://gemini.google.com/gem/1692906d9713/7688d316efff4b4f
-author:
-  - "[[Gemini]]"
-published:
-created: 2026-01-11
-description: Chatte mit Gemini, dem KI-Assistenten von Google. Lass dich beim Schreiben, Planen, Sammeln von Ideen und vielem mehr von der leistungsfähigen generativen KI von Google unterstützen.
-tags:
-  - clippings
----
 Hand aufs Herz: Hast du Drupal bisher immer nur auf „Sparflamme“ betrieben? Vielleicht auf einem Shared Hosting, wo du dir die Ressourcen mit hunderten anderen teilen musstest? Oder lokal in einer Docker-Umgebung, die zwar läuft, aber sich irgendwie... *abgekapselt* anfühlt?
 
 Vergiss das. Heute ändern wir die Spielregeln.
